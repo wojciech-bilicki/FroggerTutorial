@@ -1,0 +1,16 @@
+Button
+Label
+VBoxContainer
+PanelContainer
+CenterContainer
+Timer
+ProgressBar
+HBoxContainer
+MarginContainer
+CanvasLayer
+Node
+CollisionShape2D
+Sprite2D
+Area2D
+AnimationPlayer
+Camera2D

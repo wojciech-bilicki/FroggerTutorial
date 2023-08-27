@@ -1,0 +1,140 @@
+[gd_scene load_steps=17 format=3 uid="uid://1ea3rmf8vxv0"]
+
+[ext_resource type="PackedScene" uid="uid://c8cetrweoyvgv" path="res://Scenes/sidewalk.tscn" id="1_deaa7"]
+[ext_resource type="PackedScene" uid="uid://bwaycbrc4euff" path="res://Scenes/player.tscn" id="2_i2tlf"]
+[ext_resource type="PackedScene" uid="uid://c352cpjb8slnr" path="res://Scenes/highway_lane.tscn" id="3_ovksd"]
+[ext_resource type="Script" path="res://Scripts/highway_lanes.gd" id="4_4r3q3"]
+[ext_resource type="Texture2D" uid="uid://dkn60s177tkov" path="res://Assets/Car1.png" id="4_xh3h3"]
+[ext_resource type="Texture2D" uid="uid://bt2qg5sat24m5" path="res://Assets/Car2.png" id="5_rkgid"]
+[ext_resource type="Texture2D" uid="uid://b1ojjehexcr00" path="res://Assets/Car3.png" id="6_o36lt"]
+[ext_resource type="Texture2D" uid="uid://bjmylrthev4gi" path="res://Assets/Car4.png" id="7_ax1ud"]
+[ext_resource type="Texture2D" uid="uid://fwv4seydp6fb" path="res://Assets/Car5.png" id="8_otdvm"]
+[ext_resource type="PackedScene" uid="uid://dctd72osc5xhn" path="res://Scenes/water.tscn" id="9_iljcr"]
+[ext_resource type="PackedScene" uid="uid://bbyp1tcdv3q1t" path="res://Scenes/water_lane.tscn" id="10_7dfn0"]
+[ext_resource type="PackedScene" uid="uid://dkb7u6tgrsusa" path="res://Scenes/turtle_lane.tscn" id="11_cm7qk"]
+[ext_resource type="Script" path="res://Scripts/game_state_manager.gd" id="13_stuhr"]
+[ext_resource type="Script" path="res://Scripts/home_slots.gd" id="14_bflm5"]
+[ext_resource type="PackedScene" uid="uid://c7khlinx7xrqk" path="res://Scenes/home_slot.tscn" id="14_y4oid"]
+[ext_resource type="PackedScene" uid="uid://cxslhtrblsib6" path="res://Scenes/ui.tscn" id="16_dunfn"]
+
+[node name="main" type="Node"]
+
+[node name="UI" parent="." instance=ExtResource("16_dunfn")]
+
+[node name="Water" parent="." instance=ExtResource("9_iljcr")]
+position = Vector2(-1, -181)
+scale = Vector2(13, 6)
+
+[node name="SidewalkBottom" parent="." instance=ExtResource("1_deaa7")]
+position = Vector2(0, 418)
+
+[node name="SideWalkMiddle" parent="." instance=ExtResource("1_deaa7")]
+position = Vector2(0, 34)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Player" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("2_i2tlf")]
+z_index = 1
+position = Vector2(0, 418)
+scale = Vector2(4, 4)
+camera = NodePath("../Camera2D")
+
+[node name="HighwayLanes" type="Node" parent="."]
+script = ExtResource("4_4r3q3")
+
+[node name="HighwayLane" parent="HighwayLanes" instance=ExtResource("3_ovksd")]
+position = Vector2(0, 364)
+direction = -1
+vehicle_texture = ExtResource("4_xh3h3")
+movement_x_limit = -480
+
+[node name="HighwayLane2" parent="HighwayLanes" instance=ExtResource("3_ovksd")]
+position = Vector2(0, 300)
+vehicle_texture = ExtResource("5_rkgid")
+vehicle_count = 4
+distance_between_vehicles = 150
+speed = 250
+
+[node name="HighwayLane3" parent="HighwayLanes" instance=ExtResource("3_ovksd")]
+position = Vector2(0, 236)
+direction = -1
+vehicle_texture = ExtResource("6_o36lt")
+vehicle_count = 2
+distance_between_vehicles = 300
+movement_x_limit = -480
+
+[node name="HighwayLane4" parent="HighwayLanes" instance=ExtResource("3_ovksd")]
+position = Vector2(0, 172)
+vehicle_texture = ExtResource("7_ax1ud")
+vehicle_count = 4
+distance_between_vehicles = 300
+movement_x_limit = 600
+
+[node name="HighwayLane5" parent="HighwayLanes" instance=ExtResource("3_ovksd")]
+position = Vector2(0, 108)
+direction = -1
+vehicle_texture = ExtResource("8_otdvm")
+vehicle_count = 2
+distance_between_vehicles = 230
+speed = 160
+movement_x_limit = -480
+
+[node name="WaterLanes" type="Node" parent="."]
+
+[node name="WaterLane" parent="WaterLanes" instance=ExtResource("10_7dfn0")]
+position = Vector2(0, -30)
+logs_length = [2, 4, 6]
+distance_between_logs = 300
+speed = 250
+
+[node name="WaterLane2" parent="WaterLanes" instance=ExtResource("10_7dfn0")]
+position = Vector2(0, -94)
+logs_length = [5, 3]
+movement_x_limit = -720
+movement_direction = -1
+
+[node name="WaterLane3" parent="WaterLanes" instance=ExtResource("10_7dfn0")]
+position = Vector2(0, -158)
+
+[node name="TurtleLane" parent="WaterLanes" instance=ExtResource("11_cm7qk")]
+position = Vector2(0, -222)
+
+[node name="WaterLane4" parent="WaterLanes" instance=ExtResource("10_7dfn0")]
+position = Vector2(0, -286)
+logs_length = [4, 3, 4]
+distance_between_logs = 100
+speed = 150
+
+[node name="TurtleLane2" parent="WaterLanes" instance=ExtResource("11_cm7qk")]
+position = Vector2(0, -350)
+distance_between_sections = 80
+speed = 175
+turtle_sections_lenghts = [3, 2, 2]
+movement_x_limit = -480
+movement_direction = -1
+
+[node name="GameStateManager" type="Node" parent="."]
+script = ExtResource("13_stuhr")
+
+[node name="HomeSlots" type="Node" parent="."]
+script = ExtResource("14_bflm5")
+
+[node name="HomeSlot" parent="HomeSlots" instance=ExtResource("14_y4oid")]
+position = Vector2(-320, -412)
+scale = Vector2(4, 4)
+
+[node name="HomeSlot2" parent="HomeSlots" instance=ExtResource("14_y4oid")]
+position = Vector2(-128, -412)
+scale = Vector2(4, 4)
+
+[node name="HomeSlot3" parent="HomeSlots" instance=ExtResource("14_y4oid")]
+position = Vector2(128, -412)
+scale = Vector2(4, 4)
+
+[node name="HomeSlot4" parent="HomeSlots" instance=ExtResource("14_y4oid")]
+position = Vector2(320, -412)
+scale = Vector2(4, 4)
+
+[node name="HomeSlot5" parent="HomeSlots" instance=ExtResource("14_y4oid")]
+position = Vector2(0, -400)
+scale = Vector2(3, 3)

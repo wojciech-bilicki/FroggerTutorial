@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3 uid="uid://c1kpd6dntdf0x"]
+
+[ext_resource type="Texture2D" uid="uid://cfkcig2ucsr2a" path="res://Assets/Turtle_01.png" id="1_04ljt"]
+[ext_resource type="Script" path="res://Scripts/turtle.gd" id="1_nml1l"]
+[ext_resource type="Texture2D" uid="uid://7ckp761fx65b" path="res://Assets/Turtle_02.png" id="2_k1vkn"]
+[ext_resource type="Texture2D" uid="uid://blqrn6m67s2v8" path="res://Assets/Turtle_03.png" id="3_fa25c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hibpr"]
+size = Vector2(13, 9)
+
+[sub_resource type="Animation" id="Animation_37sdn"]
+resource_name = "swim"
+length = 0.9
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("1_04ljt"), ExtResource("2_k1vkn"), ExtResource("3_fa25c")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_m5hwe"]
+_data = {
+"swim": SubResource("Animation_37sdn")
+}
+
+[node name="Turtle" type="Area2D"]
+script = ExtResource("1_nml1l")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_04ljt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 0.5)
+shape = SubResource("RectangleShape2D_hibpr")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "swim"
+libraries = {
+"": SubResource("AnimationLibrary_m5hwe")
+}

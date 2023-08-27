@@ -1,0 +1,89 @@
+[gd_scene load_steps=7 format=3 uid="uid://cxslhtrblsib6"]
+
+[ext_resource type="Script" path="res://Scenes/ui.gd" id="1_vt40a"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ruq75"]
+bg_color = Color(0.843137, 0, 0.160784, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8o2kr"]
+bg_color = Color(0, 0.72549, 0.184314, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0v3yu"]
+bg_color = Color(0, 0.729412, 0.0627451, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bvtp8"]
+bg_color = Color(0.894118, 0, 0.192157, 1)
+
+[sub_resource type="Theme" id="Theme_7m7yc"]
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_0v3yu")
+PanelContainerRed/base_type = &"PanelContainer"
+PanelContainerRed/styles/panel = SubResource("StyleBoxFlat_bvtp8")
+
+[node name="UI" type="CanvasLayer"]
+script = ExtResource("1_vt40a")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+alignment = 1
+
+[node name="LifesContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="TimerContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/TimerContainer"]
+layout_mode = 2
+text = "Time:"
+
+[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/HBoxContainer/TimerContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(400, 30)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_ruq75")
+theme_override_styles/fill = SubResource("StyleBoxFlat_8o2kr")
+max_value = 30.0
+value = 30.0
+fill_mode = 1
+show_percentage = false
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer"]
+visible = false
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/CenterContainer"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+theme = SubResource("Theme_7m7yc")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/CenterContainer/PanelContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="GameResultLabel" type="Label" parent="MarginContainer/CenterContainer/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "YOU WIN"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="MarginContainer/CenterContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Restart"
+
+[node name="TimeoutTimer" type="Timer" parent="."]
+
+[connection signal="pressed" from="MarginContainer/CenterContainer/PanelContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]

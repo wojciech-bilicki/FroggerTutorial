@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dkb7u6tgrsusa"]
+
+[ext_resource type="Script" path="res://Scripts/turtle_lane.gd" id="1_37obm"]
+
+[node name="TurtleLane" type="Node2D"]
+script = ExtResource("1_37obm")

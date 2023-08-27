@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dn5fcai2j6yuo"]
+
+[ext_resource type="Script" path="res://Scripts/turtle_section.gd" id="1_26act"]
+
+[node name="TurtleSection" type="Node2D"]
+script = ExtResource("1_26act")
